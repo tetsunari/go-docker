@@ -1,0 +1,57 @@
+{
+  "name": "AtCoder Go Development Environment",
+  "dockerComposeFile": "../compose.yaml",
+  "service": "atcoder-dev",
+  "workspaceFolder": "/app",
+  "shutdownAction": "stopCompose",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.Go",
+        "ms-vscode.vscode-go",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "ms-vscode.cpptools",
+        "ms-vscode.hexeditor",
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "go.toolsManagement.checkForUpdates": "local",
+        "go.useLanguageServer": true,
+        "go.gopath": "/go",
+        "go.goroot": "/usr/local/go",
+        "go.formatTool": "gofmt",
+        "go.lintTool": "golint",
+        "go.vetTool": "go vet",
+        "go.buildTags": "",
+        "go.testTimeout": "30s",
+        "go.testEnvVars": {},
+        "go.coverOnSave": false,
+        "go.coverMode": "set",
+        "go.coverShowCounts": false,
+        "go.gocodeAutoBuild": false,
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash"
+          }
+        }
+      }
+    }
+  },
+
+  "postCreateCommand": "go mod download",
+  "postStartCommand": "echo 'AtCoder Go環境が起動しました。airを開始するには: air -c .air.toml'",
+
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+
+  "mounts": [
+    "source=go-mod-cache,target=/go/pkg/mod,type=volume"
+  ],
+
+  "remoteUser": "root"
+}
